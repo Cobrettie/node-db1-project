@@ -23,19 +23,6 @@ router.post('/', async (req, res) => {
 })
 
 // Read
-// router.get('/', (req, res) => {
-//   knex('accounts')
-//     .then(accounts => {
-//       res.status(200).json(accounts)
-//     })
-//     .catch(err => {
-//       console.log("Error: ", err)
-//       res.status(500).json({
-//         errorMessage: "Problem with db"
-//       })
-//     })
-// })
-
 router.get('/', async (req, res) => {
   try {
     const accounts = await knex('accounts');
@@ -54,7 +41,13 @@ router.get('/:id', async (req, res) => {
     const account = await knex('accounts').where({
       id: id
     })
-    res.status(200).json(account)
+    if (id) {
+      res.status(200).json(account)
+    } else {
+      res.status(400).json({
+        errorMessage: "Invalid ID"
+      })
+    }
   } catch (err) {
     console.log("Error: ", err);
     res.status(500).json({
@@ -64,12 +57,25 @@ router.get('/:id', async (req, res) => {
 })
 
 // Update
-router.put('/:id', (req, res) => {
-  // try{
-    
-  // } catch (err) {
+router.put('/:id', async (req, res) => {
+  const {id} = req.params;
+  const updatedAccount = req.body;
 
-  // }
+  try {
+    const count = await knex('accounts').insert(updatedAccount).where(id)
+    if (count) {
+      res.status(200).json({ updated: count })
+    } else {
+      res.status(404).json({
+        errorMessage: "Invalid info"
+      })
+    }
+  } catch (err) {
+    console.log("Error: ", err);
+    res.status(500).json({
+      errorMessage: "Could not updated account"
+    })
+  }
 
 })
 
