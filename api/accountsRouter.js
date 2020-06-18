@@ -76,12 +76,27 @@ router.put('/:id', async (req, res) => {
       errorMessage: "Could not updated account"
     })
   }
-
 })
 
 // Delete
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
+  const {id} = req.params;
 
+  try {
+    const count = await knex('accounts').delete().where({id})
+    if (count) {
+      res.status(200).json({ removed: count })
+    } else {
+      res.status(404).json({
+        errorMessage: "Invalid ID"
+      })
+    }
+  } catch (err) {
+    console.log("Error: ", err);
+    res.status(500).json({
+      errorMessage: "Could not delete account"
+    })
+  }
 })
 
 module.exports = router;
