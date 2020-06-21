@@ -25,7 +25,10 @@ router.post('/', async (req, res) => {
 // Read
 router.get('/', async (req, res) => {
   try {
-    const accounts = await knex('accounts');
+    const { limit = 10, sortby = 'id', sortdir} = req.query;
+    const accounts = await knex('accounts')
+      .orderBy(sortby, sortdir)
+      .limit(limit)
     res.status(200).json(accounts)
   } catch (err) {
     console.log("Error: ", err)
