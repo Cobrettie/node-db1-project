@@ -75,10 +75,3 @@ The following exercises **require research**, the concepts needed to complete th
   - run the API and test using an HTTP client like `Postman`.
 - write a React front end and connect it to the API.
 
-
-### Heldpful information for this module
-
-- knex is our query builder library
-  - all knex queries return promises
-
-- sqlite3 allows us to interface with a sqlite database
