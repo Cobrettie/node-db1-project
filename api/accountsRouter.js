@@ -40,7 +40,7 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params
     const account = await knex('accounts').where({
       id: id
-    })
+    }).first();
     if (id) {
       res.status(200).json(account)
     } else {

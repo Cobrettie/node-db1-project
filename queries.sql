@@ -22,7 +22,7 @@
 -- Find all customers that live in London, Madrid, or Brazil
 
   -- SELECT * FROM [Customers]
-  -- WHERE City = 'London' OR City = 'Madrid' OR Couunry = 'Brazil'
+  -- WHERE City = 'London' OR City = 'Madrid' OR Country = 'Brazil'
 
 
 -- Add a customer record for "The Shire", the contact name is "Bilbo Baggins" the address is -"1 Hobbit-Hole" in "Bag End", postal code "111" and the country is "Middle Earth"
@@ -40,4 +40,9 @@
 
 -- (Stretch) Find a query to discover how many different cities are stored in the Customers table. Repeats should not be double counted
 
+  -- SELECT COUNT (DISTINCT City) FROM [Customers]
+
+
 -- (Stretch) Find all suppliers who have names longer than 20 characters. You can use `length(SupplierName)` to get the length of the name
+
+  -- SELECT * FROM [Suppliers] WHERE LENGTH(SupplierName) > 20
